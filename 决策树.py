@@ -1,5 +1,4 @@
-一、导入Python库文件
-
+#一、导入Python库文件
 # 导入Python库
 import pandas as pd  # pandas :数据分析库
 from sklearn.model_selection import train_test_split  # sklearn:机器学习库
@@ -24,19 +23,19 @@ import warnings  # 发出警告,或者忽略它或引发异常。
 warnings.filterwarnings('ignore')
 
 
-二、获取数据
+#二、获取数据
 # 获取信用卡欺诈数据
 data = pd.read_csv('基于决策树识别信用卡数据欺诈行为/信用卡欺诈数据.csv')
 
 
-三、数据预处理
+#三、数据预处理
 # 数据存在空值, 删除空值
 data = data.dropna()
 # 删除完全一样的数据，去重
 data = data.drop_duplicates()
 
 
-四、查看数据分布
+#四、查看数据分布
 
 # 数据分析：统计欺诈非欺诈数量
 num_1 = len(data[data['Class']==1])
@@ -60,7 +59,7 @@ features = data[column_names].values
 X_train, X_test, y_train, y_test = train_test_split(features, target, test_size=0.2, stratify=target)
 
 
-六、寻找树的最佳深度
+#六、寻找树的最佳深度
 
 # 找到树的最佳深度
 # 设定树的深度范围
@@ -90,17 +89,17 @@ tree_dep = te_best_index + 1
 print('树的最佳深度，：', tree_dep)
 
 
-七、建立模型
+#七、建立模型
 # 建立模型
 model = DecisionTreeClassifier(max_depth=tree_dep)
 
 
-八、训练模型
+#八、训练模型
 # 训练模型
 model.fit(X_train, y_train)
 
 
-九、模型评估
+#九、模型评估
 y_pred = model.predict(X_test)
 # 模型评估
 # 分类指标的文本报告
@@ -109,7 +108,7 @@ print('分类指标的文本报告:')
 
 print(classification_report(y_test, y_pred))
 
-十、可视化决策树
+#十、可视化决策树
 # 列出决策树的所有标签，是一个数组
 class_names = model.classes_
 # 将标签类型转为str
@@ -129,7 +128,7 @@ importances = importances.sort_values('importance', ascending=False)
 importances.to_csv('基于决策树识别信用卡数据欺诈行为/属性重要性排序.csv', index=False, encoding='utf-8-sig')
 
 
-十一、模型预测
+#十一、模型预测
 # 获取预测数据
 file_pre = '基于决策树识别信用卡数据欺诈行为/信用卡欺诈预测数据.csv'
 df_pre = pd.read_csv(file_pre)
